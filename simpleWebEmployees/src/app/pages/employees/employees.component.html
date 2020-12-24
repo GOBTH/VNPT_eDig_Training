@@ -1,0 +1,22 @@
+<div class="container mt-s">
+  <h2>List Of Employees</h2>
+  <button routeLink="employee/add/0" class="btn btn-primary mt-5 mb-3">Add Employee</button>
+  <table class="table">
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Note!</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{employee.id}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.phone}}</td>
+        <td><button [routerLinkActive]="['employee/edit', employee.id.toString()]">Edit</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
