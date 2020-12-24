@@ -1,0 +1,85 @@
+HTML
+			tags
+			elements
+			attributes
+			content
+			text
+			image and linking doc
+			gathering user input
+			demonstration: creating a simple contact form
+	attaching scripts to an html page
+	always have the same structure
+		DOCTYPE declaration
+		HTML section containing
+			header
+			body
+	each version only has one DOCTYPE
+		The browser uses the DOCTYPE declaration to determine how to interpret the HTML markup
+		For HTML5 pages, specify a DOCTYPE of html
+	
+	html elements define the structrure and semantic web page
+	elements identifications by <> and </>
+	using attributes to support the info
+	tag text
+		h1
+		h2
+		p
+	tag emphasis
+		strong
+		em
+	tag list
+		ul
+		li
+	tag img
+	tag a: define link
+		href attributes --> link target
+	tag form
+	tag script: add code js
+	tag noscript
+
+CSS
+	structure:
+		selector{
+			property1: value
+			property2: value
+			...
+			propertyN: value
+		}
+	/*this is comment*/
+	types:
+		element selector: h2{}, button{}
+		class selector: .myclass{}
+		id selector: #thisld{}
+	selector can be comibined
+	wildcard * selector returns the set of all elements
+	
+	[....] refine selectors based on attributes values
+	
+	html thua ke and bac css dieu khien cach browser apply theo tung rule
+	use an element's style attribute to define styles specific to that element <p style="color:blue"
+	<style type="text/css"> p { color: blue; } /style>
+	<link rel = "stylesheet"
+
+HTML5 new element:
+	hgroup (h1, h2)
+	time
+	mark
+	small
+	figure
+	img
+CSS text styles
+	font-familly: Arial Canada Verdana Sans-serif
+	font-size: 16px
+	font-style: italic
+	font-weight: bold
+	margin(border(padding(content)))
+	
+CSS background
+	background-image
+	background-size
+	background-color
+	background-position
+	background-origin
+	background-repeat
+	background-attachment
+	
