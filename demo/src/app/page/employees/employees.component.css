@@ -1,0 +1,14 @@
+.backgroundHead{
+  background-color: lightgrey;
+  border: 1px solid grey;
+}
+.edit {
+  border: none;
+}
+.delete {
+  border: none;
+}
+tr{
+  width: 100px;
+  height: 20px;
+}

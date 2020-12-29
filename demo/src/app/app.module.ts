@@ -7,7 +7,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { EmployeesComponent } from './page/employees/employees.component';
 import { EditComponent } from './page/employees/edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MenuItem } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,

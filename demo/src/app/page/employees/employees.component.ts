@@ -14,9 +14,15 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.employees = this.employeeService.onGet();
   }
-
   onDelete(id: number){
+    window.alert("Are you sure ?");
     this.employeeService.onDelete(id);
   }
 
+  formatDate(date: Date){
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let yyyy = String(date.getFullYear()).padStart(4, '0');
+    return dd + '-' + mm + '-' + yyyy;
+  }
 }

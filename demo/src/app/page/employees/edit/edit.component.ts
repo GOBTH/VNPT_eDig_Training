@@ -39,7 +39,10 @@ export class EditComponent implements OnInit {
       id: form.value.id,
       name: form.value.name,
       email: form.value.email,
-      phone: form.value.phone
+      phone: form.value.phone,
+      birth: new Date(this.revertDate(form.value.birth)),
+      code: form.value.code,
+      image: form.value.image
     }
     if (this.id === '0'){
       this.employeeService.onAdd(employee);
@@ -49,5 +52,19 @@ export class EditComponent implements OnInit {
     }
 
     this.router.navigateByUrl('');
+  }
+  formatDate(date: Date){
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let yyyy = String(date.getFullYear()).padStart(4, '0');
+    return dd + '-' + mm + '-' + yyyy;
+  }
+  revertDate(s: string){
+    let t = s.replace("/", "-");
+    let arrS = t.split('-');
+    return arrS[2] + '-' + arrS[1] + '-' + arrS[0];
+  }
+  getNewMax(){
+    return this.employeeService.getNewMax();
   }
 }

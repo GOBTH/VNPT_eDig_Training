@@ -1,13 +1,25 @@
+<style>
+  thead, tbody, th, tr, td {
+    width:100px;
+    height: 20px;
+    text-align: center;
+    border: 1px black;
+  }
+</style>
 <div>
   <h2>List of employees</h2>
   <a routerLink="employee/add/0">Add employee</a>
   <table>
-    <thead>
-      <th>id</th>
-      <th>name</th>
-      <th>email</th>
-      <th>phone</th>
-      <th>func</th>
+    <thead style="color: blue;" class="backgroundHead">
+      <th>ID</th>
+      <th>NAME</th>
+      <th>EMAIL</th>
+      <th>PHONE</th>
+      <th>BIRTH</th>
+      <th>CODE</th>
+      <th>PORTRAIT</th>
+      <th class = "edit">EDIT</th>
+      <th class = "delete">DELETE</th>
     </thead>
     <tbody>
       <tr *ngFor="let employee of employees">
@@ -15,6 +27,9 @@
         <td>{{ employee.name }}</td>
         <td>{{ employee.email }}</td>
         <td>{{ employee.phone }}</td>
+        <td>{{ formatDate(employee.birth) }}</td>
+        <td>{{ employee.code }}</td>
+        <td><a href={{employee.image}}>url</a></td>
         <td><a [routerLink]="['employee/edit', employee.id]">Edit</a></td>
         <td><button (click)="onDelete(employee.id)">Delete</button></td>
       </tr>
