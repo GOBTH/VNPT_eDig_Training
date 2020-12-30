@@ -2,56 +2,52 @@
   <h2>{{ header }}</h2>
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class = "divInput">
-      <label for="">ID : </label>
+      <label for="">ID : {{f.value.id === '0'? 'Sai': 'Đúng'}} </label> <br>
       <br>
-        <input type="text" [ngModel]="employee.id === 0? getNewMax() :employee.id" name="id">
-      <br>
+      <input type="text" [ngModel]="employee.id === 0? getNewMax() :employee.id" name="id">
     </div>
 
     <div class = "divInput">
       <label for="">Name</label>
       <br>
-        <input type="text" [ngModel]="employee.name" name="name">
-      <br>
+      <input type="text" [ngModel]="employee.name" name="name">
+      <p *ngIf = "f.value.name === ''" style = "color: orange;">Chưa nhập tên!</p>
     </div>
 
     <div class = "divInput">
       <label for="">Email</label>
       <br>
-        <input type="text" [ngModel]="employee.email" name="email">
-      <br>
+      <input placeholder="abc@gmail.com" type="text" [ngModel]="employee.email" name="email">
+      <p *ngIf = "checkEmail(f.value.email)===false && f.value.email !== ''" style = "color: red;">Nhập sai email!</p>
+
     </div>
 
     <div class = "divInput">
-      <label for="">Phone</label>
-      <br>
-        <input type="text" [ngModel]="employee.phone" name="phone">
-      <br>
+      <label for="">Phone</label><br>
+      <input placeholder="Nhập vào đúng định dạng số điện thoại - 10 số " type="text" [ngModel]="employee.phone !== 0? employee.phone:''" name="phone">
+      <p *ngIf = "checkPhone(f.value.phone)===false && f.value.phone !== ''" style = "color: red;">Nhập sai hoặc chưa nhập!</p>
     </div>
 
     <div class = "divInput">
-      <label for="">BirthDay</label>
-      <br>
-        <input type="text" [ngModel]="employee.birth" name="birth">
-      <br>
+      <label for="">BirthDay</label><br>
+      <p *ngIf = "checkDate(f.value.birth) === false && f.value.birth !== ''" style = "color: red;">Nhập sai hoặc chưa nhập!</p>
+      <input placeholder="Nhập vào đúng định dạng ngày tháng năm, dấu gạch nối (dd-mm-yyyy)" type="text" [ngModel]="employee.birth === ''? '': formatDate(employee.birth)" name="birth">
     </div>
 
     <div class = "divInput">
-      <label for="">Code</label>
-      <br>
-        <input type="text" [ngModel]="employee.code" name="code">
-      <br>
+      <label for="">Code</label><br>
+      <input placeholder="Nhập code" type="text" [ngModel]="employee.code" name="code">
+
     </div>
 
     <div class = "divInput">
-      <label for="">Image</label>
-      <br>
-        <input type="text" [ngModel]="employee.image" name="image">
-      <br>
+      <label for="">Image</label><br>
+      <input placeholder = "https://photo.vn/portrait.png" type="text" [ngModel]="employee.image" name="image">
+      <p *ngIf = "checkImageUrl(f.value.image) === false && f.value.image!==''" style = "color: red;">Đường dẫn không dẫn đến ảnh</p>
     </div>
 
     <div  class = "divInput">
-      <button type="submit">
+      <button type="submit" >
         Save
       </button>
     </div>

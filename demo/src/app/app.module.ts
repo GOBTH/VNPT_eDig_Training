@@ -8,6 +8,8 @@ import { EmployeesComponent } from './page/employees/employees.component';
 import { EditComponent } from './page/employees/edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { ConfirmDialogDeleteComponent } from './page/employees/confirm-dialog-delete/confirm-dialog-delete.component';
+import { ConfirmDialogDeleteModule } from './page/employees/confirm-dialog-delete/confirm-dialog-delete/confirm-dialog-delete.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { MenuItem } from 'primeng/api';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmDialogDeleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

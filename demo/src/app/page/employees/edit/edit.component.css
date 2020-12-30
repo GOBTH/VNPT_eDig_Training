@@ -1,10 +1,20 @@
 input {
   width: 700px;
-  height: 30px;
+  height: 40px;
+  font-size: 20px;
 }
 
 .divInput {
   width: 1000px;
-  height: 60px;
+  height: 100px;
+  border: 1px gray;
 }
+
+p {
+  font-size: 15px;
+  font-style: italic;
+  font: Times;
+}
+
+
 
