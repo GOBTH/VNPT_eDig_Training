@@ -1,3 +1,4 @@
+
 <style>
   thead, tbody, th, tr, td {
     width:100px;
@@ -31,8 +32,8 @@
         <td>{{ employee.code }}</td>
         <td><a href={{employee.image}}>url</a></td>
         <td><a [routerLink]="['employee/edit', employee.id]">Edit</a></td>
-        <!-- <td><button (click)="onDelete(employee.id)">Delete</button></td> -->
-        <td><button (click)="showDialog()">Delete</button></td>
+        <td><button (click)="onDelete(employee.id)">Delete</button></td>
+        <!-- <td><button (click)="clickMethod(employee.id)">Delete</button></td> -->
       </tr>
     </tbody>
   </table>

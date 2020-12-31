@@ -38,4 +38,10 @@ export class EmployeesComponent implements OnInit {
       alert('No');
     })
   }
+  clickMethod(id: number){
+    if(confirm("Are you sure to delete ")) {
+      console.log("Implement delete functionality here");
+      this.employeeService.onDelete(id);
+    }
+  }
 }

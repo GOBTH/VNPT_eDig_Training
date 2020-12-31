@@ -1,7 +1,3 @@
-
-Step 5. confirm-dialog.component.css
-
-Now, we will write some CSS  to decorate our component. Create a file named 'confirm-dialog.component.css' and paste the below code into it.
 .custom-alert {
     width:300px;
 }

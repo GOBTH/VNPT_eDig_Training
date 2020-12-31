@@ -32,8 +32,10 @@
       <label for="">BirthDay</label><br>
       <p *ngIf = "checkDate(f.value.birth) === false && f.value.birth !== ''" style = "color: red;">Nhập sai hoặc chưa nhập!</p>
       <input placeholder="Nhập vào đúng định dạng ngày tháng năm, dấu gạch nối (dd-mm-yyyy)" type="text" [ngModel]="employee.birth === ''? '': formatDate(employee.birth)" name="birth">
+      <!-- <input matInput [matDatepicker]="picker"> -->
+      <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker> -->
     </div>
-
     <div class = "divInput">
       <label for="">Code</label><br>
       <input placeholder="Nhập code" type="text" [ngModel]="employee.code" name="code">
