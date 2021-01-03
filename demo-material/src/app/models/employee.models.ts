@@ -3,7 +3,7 @@ export class Employee{
   public name   = '';
   public email  = '';
   public phone  = '';
-  public birth  = new Date('1900-01-01');
+  public birth  = new Date('2000-01-01');
   public code   = '';
   public image  = '';
 }

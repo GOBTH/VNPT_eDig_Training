@@ -3,6 +3,8 @@ import { DataSource } from '@angular/cdk/collections';
 import { Employee } from '../models/employee.models';
 import { EmployeesService } from '../services/employees.service';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletingDialogComponent } from './deleting-dialog/deleting-dialog.component';
 
 export interface EmployeeElement {
   id: string ,
@@ -14,7 +16,6 @@ export interface EmployeeElement {
   image: string ,
 }
 
-const ELEMENT_DATA: Employee[] = new EmployeesService().onGet();
 
 @Component({
   selector: 'app-employee',
@@ -22,6 +23,7 @@ const ELEMENT_DATA: Employee[] = new EmployeesService().onGet();
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
+  dataSource = this.eServices.onGet();
   displayedColumns: string[] = [
     'id' ,
     'name' ,
@@ -33,15 +35,14 @@ export class EmployeeComponent implements OnInit {
     'edit',
     'delete'
   ];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
+
+  constructor(
+    public eServices: EmployeesService,
+    public dialog: MatDialog
+    ) { }
   ngOnInit(): void {
   }
 
-  // public getDateToString(date: Date, mode = 'dd-MM-yyyy', location = 'vi'){
-  //   let datepipe = new DatePipe(location);
-  //   return datepipe.transform(date, mode);
-  // }
   getDateToString(date: Date){
     let dd = String(date.getDate()).padStart(2, '0');
     let mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -50,8 +51,17 @@ export class EmployeeComponent implements OnInit {
   }
 
   onNavigate(url: string){
-    //const url = 'https://www.google.com';
     window.open(url, '_blank');
+  }
+
+  openDialog(id: string){
+    let dialogRef = this.dialog.open(DeletingDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(`${result}` === 'true'){
+        console.log('Chua biet cach update lai cai danh sach');
+      }
+    });
   }
 
 }

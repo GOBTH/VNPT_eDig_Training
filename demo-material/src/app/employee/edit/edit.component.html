@@ -1,34 +1,63 @@
-<div>
-  <p>
-    <mat-form-field appearance="legacy">
-      <mat-label>Legacy form field</mat-label>
-      <input matInput placeholder="Placeholder">
-      <mat-icon style="color: green;" matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
+
+<h2>{{editOrAdd===true?'Edit an employee':'Add an employee'}}</h2>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <!-- <div *ngIf="editOrAdd === true" class="form-group">
+    <p>ID</p>
+    <mat-form-field>
+      <input matInput placeholder="ID" [ngModel]="employee.id" name="id">
     </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="standard">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Placeholder">
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
+  </div> -->
+  <div class="form-group">
+    <p>Họ và tên</p>
+    <mat-form-field>
+      <mat-label>Nhập họ và tên</mat-label>
+      <input matInput placeholder="Họ và tên" [ngModel]="employee.name" name="name" required>
     </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Fill form field</mat-label>
-      <input matInput placeholder="Placeholder">
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
+    <mat-error *ngIf="cName(f.value.name)===false">Sai định dạng Họ và tên hoặc chưa nhập họ tên</mat-error>
+  </div>
+  <div class="form-container">
+    <p>Email</p>
+    <mat-form-field>
+      <mat-label>Nhập địa chỉ email</mat-label>
+      <input matInput placeholder="abcdef@gmail.com" [ngModel]="employee.email" name="email">
     </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Outline form field</mat-label>
-      <input matInput placeholder="Placeholder">
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
+    <mat-error *ngIf="cEmail(f.value.email)===false">Sai định dạng email hoặc chưa nhập email</mat-error>
+  </div>
+  <div class="form-container">
+    <mat-form-field class="mat-form-field-date-picker" appearance="fill">
+      <mat-label>Ngày - Tháng - Năm sinh</mat-label>
+      <input matInput [matDatepicker]="picker" [ngModel]="employee.birth" name="birth">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  </p>
-</div>
+  </div>
+  <div class="form-container">
+    <p>Số điện thoại</p>
+    <mat-form-field>
+      <mat-label>Nhập số điện thoại theo mẫu</mat-label>
+      <input matInput placeholder="012345678" [ngModel]="employee.phone" name="phone">
+    </mat-form-field>
+    <mat-error *ngIf="cPhone(f.value.phone)===false">Nhập sai định dạng số điện thoại</mat-error>
+  </div>
+
+  <div class="form-container">
+    <p>Code</p>
+    <mat-form-field>
+      <input matInput placeholder="Input" [ngModel]="employee.code" name="code">
+    </mat-form-field>
+    <mat-error *ngIf="cCode(f.value.code)===false">Sai định dạng code hoặc chưa nhập code</mat-error>
+  </div>
+
+  <div class="form-container">
+    <p>Liên kết đến ảnh chân dung</p>
+    <mat-form-field>
+      <input matInput placeholder="url" [ngModel]="employee.image" name="image">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button>Save</button>
+  </div>
+</form>
+<div><Button (click)="onBack()">Back</Button></div>
