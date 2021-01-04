@@ -54,6 +54,7 @@
     <mat-form-field>
       <input matInput placeholder="url" [ngModel]="employee.image" name="image">
     </mat-form-field>
+    <mat-error *ngIf="cImageLink(f.value.image)===false" >Sai định dạng link ảnh hoặc chưa nhập</mat-error>
   </div>
 
   <div>

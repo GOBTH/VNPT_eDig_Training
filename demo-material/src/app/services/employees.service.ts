@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Employee } from '../models/employee.models';
 
 @Injectable({
@@ -49,7 +50,8 @@ export class EmployeesService {
 
   onAdd(newEmployee: Employee){
 
-    return this.lstEmployees.push(newEmployee);
+    this.lstEmployees.push(newEmployee);
+    ELEMENT_DATA = this.lstEmployees;
 
   }
 
@@ -58,13 +60,21 @@ export class EmployeesService {
     const removedEmployee = this.onGetId(id) as Employee;
     const index = this.lstEmployees.indexOf(removedEmployee, 0);
     this.lstEmployees.splice(index, 1);
-    console.log(this.lstEmployees.length);
+    //console.log(this.lstEmployees.length);
 
+  }
+
+  onRemoveDataSource(id: string): Observable<EmployeeElement[]> {
+    //this.onRemove(id);
+    let lst = this.onGet();
+    return of(lst);
   }
 
   onUpdate(employee: Employee){
     let index = this.lstEmployees.findIndex(element => element.id === employee.id);
     this.lstEmployees[index] = employee;
+    ELEMENT_DATA[index] = employee;
+    console.log(ELEMENT_DATA);
   }
 
   onFindId(id: string){
@@ -76,3 +86,15 @@ export class EmployeesService {
   }
 
 }
+
+export interface EmployeeElement {
+  id: string ,
+  name: string ,
+  email: string ,
+  phone: string ,
+  birth: Date ,
+  code: string ,
+  image: string ,
+}
+
+export let ELEMENT_DATA: EmployeeElement [] = new EmployeesService().onGet();

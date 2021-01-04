@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeesService } from '../../services/employees.service';
+import { EmployeesService, ELEMENT_DATA, EmployeeElement } from '../../services/employees.service';
 import { Employee } from '../../models/employee.models';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-edit',
@@ -11,7 +12,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  id: string | null = null;
+  id: string | any;
+  dataSource = new MatTableDataSource<EmployeeElement>(ELEMENT_DATA);
   employee = {
     id     : '',
     name   : '',
@@ -31,7 +33,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') as string;
-    console.log(this.id);
+    //console.log(this.id);
     this.editOrAdd = (String(this.id) !== '0');
     if (this.editOrAdd) {
       this.employee = this.employeeServices.onGetId(this.id) as Employee;
@@ -39,16 +41,16 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    console.log(form.value);
+    //console.log(form.value);
     this.flag = this.cEmail(form.value.email)
     && this.cName(form.value.name)
     && this.cPhone(form.value.phone)
     && this.cImageLink(form.value.image)
     && this.cCode(form.value.code);
-    console.log(this.cImageLink(form.value.image));
+    //console.log(this.cImageLink(form.value.image));
     if (this.flag === true || this.id === '0'){
       const e: Employee = {
-        id: form.value.id,
+        id: this.id,
         name: form.value.name,
         email: form.value.email,
         phone: form.value.phone,
@@ -59,10 +61,12 @@ export class EditComponent implements OnInit {
       if (this.id === '0' && this.onCheck(form)){
         e.id = this.randomId();
         this.employeeServices.onAdd(e);
-        console.log(e);
+        //console.log(this.employeeServices.lstEmployees.length);
       }
       else{
         this.employeeServices.onUpdate(e);
+        console.log('update');
+        console.log(this.employeeServices.lstEmployees[0]);
       }
 
     }
@@ -98,7 +102,7 @@ export class EditComponent implements OnInit {
   }
 
   cPhone(phone: string){
-    const re = new RegExp('^((\\+84-?)|0)?[0-9]{9}$');
+    const re = new RegExp('^((\\+84-?)|0)?[0-9]{10}$');
     return re.test(String(phone));
   }
 
