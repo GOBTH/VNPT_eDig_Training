@@ -61,15 +61,15 @@ export class NavbarComponent implements OnInit{
           }, 500);
 
           html.classList.add('nav-open');
-          if (window.innerWidth < 200) {
-            mainPanel.style.position = 'static';
+          if (window.innerWidth < 961) {
+            mainPanel.style.position = 'fixed';
           }
           this.sidebarVisible = true;
       };
       sidebarClose() {
           const html = document.getElementsByTagName('html')[0];
           let mainPanel:  HTMLElement = document.getElementsByClassName('main-panel')[0] as HTMLElement;
-          if (window.innerWidth < 200) {
+          if (window.innerWidth < 961) {
             setTimeout(function(){
               mainPanel.style.position = '';
             }, 500);
