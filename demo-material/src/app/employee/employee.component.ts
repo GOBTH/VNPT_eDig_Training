@@ -8,6 +8,7 @@ import { DeletingDialogComponent } from './deleting-dialog/deleting-dialog.compo
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { EdittingDialogComponent } from './editting-dialog/editting-dialog.component';
 
 
 
@@ -58,6 +59,15 @@ export class EmployeeComponent implements OnInit {
         this.eServices.onRemove(id);
         this.refresh(id);
         //console.log(this.dataSource.data);
+      }
+    });
+  }
+
+  openDialogEditting(id: string){
+    let dialogRef = this.dialog.open(EdittingDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (`${result}` === 'true'){
+
       }
     });
   }

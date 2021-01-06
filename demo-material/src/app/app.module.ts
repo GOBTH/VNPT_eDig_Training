@@ -27,13 +27,15 @@ import { AddComponent } from './employee/add/add.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingDialogComponent } from './employee/deleting-dialog/deleting-dialog.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { EdittingDialogComponent } from './employee/editting-dialog/editting-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
     EditComponent,
     AddComponent,
-    DeletingDialogComponent
+    DeletingDialogComponent,
+    EdittingDialogComponent
   ],
   entryComponents : [DeletingDialogComponent],
   imports: [
