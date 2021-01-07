@@ -1,70 +1,70 @@
-<div class="row">
-  <div class = "col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title" style="text-align: center;">Edit an employee</h5>
-      </div>
-      <div class="card-body">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-          <!-- <div *ngIf="editOrAdd === true" class="form-group">
-            <p>ID</p>
-            <mat-form-field>
-              <input matInput placeholder="ID" [ngModel]="employee.id" name="id">
-            </mat-form-field>
-          </div> -->
-          <div class="form-group">
-            <p>Họ và tên</p>
-            <mat-form-field>
-              <mat-label>Nhập họ và tên</mat-label>
-              <input matInput placeholder="Họ và tên" [ngModel]="employee.name" name="name" required>
-            </mat-form-field>
-            <mat-error *ngIf="cName(f.value.name)===false">Sai định dạng Họ và tên hoặc chưa nhập họ tên</mat-error>
-          </div>
-          <div class="form-container">
-            <p>Email</p>
-            <mat-form-field>
-              <mat-label>Nhập địa chỉ email</mat-label>
-              <input matInput placeholder="abcdef@gmail.com" [ngModel]="employee.email" name="email">
-            </mat-form-field>
-            <mat-error *ngIf="cEmail(f.value.email)===false">Sai định dạng email hoặc chưa nhập email</mat-error>
-          </div>
-          <div class="form-container">
-            <mat-form-field class="mat-form-field-date-picker" appearance="fill">
-              <mat-label>Ngày - Tháng - Năm sinh</mat-label>
-              <input matInput [matDatepicker]="picker" [ngModel]="employee.birth" name="birth">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="form-container">
-            <p>Số điện thoại</p>
-            <mat-form-field>
-              <mat-label>Nhập số điện thoại theo mẫu</mat-label>
-              <input matInput placeholder="012345678" [ngModel]="employee.phone" name="phone">
-            </mat-form-field>
-            <mat-error *ngIf="cPhone(f.value.phone)===false">Nhập sai định dạng số điện thoại</mat-error>
-          </div>
+<div class="wrapper">
+  <div class="main-panel" style="height:1200px;">
+    <div class="content" >
+      <div class="row">
+        <div class = "col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title" style="text-align: center;">Edit an employee</h5>
+            </div>
+            <div class="card-body"  style="height:900px;">
+              <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="form-group">
+                  <p>Họ và tên</p>
+                  <input matInput placeholder="" [ngModel]="employee.name" name="name" required>
+                  <!-- <mat-form-field>
+                    <mat-label>Nhập họ và tên</mat-label>
+                  </mat-form-field> -->
+                  <!-- <mat-error *ngIf="cName(f.value.name)===false">Sai định dạng Họ và tên hoặc chưa nhập họ tên</mat-error> -->
+                </div>
+                <div class="form-container">
+                  <p>Email</p>
+                  <input matInput placeholder="" [ngModel]="employee.email" name="email">
+                  <!-- <mat-form-field> -->
+                    <!-- <mat-label>Nhập địa chỉ email</mat-label> -->
+                  <!-- </mat-form-field> -->
+                  <!-- <mat-error *ngIf="cEmail(f.value.email)===false">Sai định dạng email hoặc chưa nhập email</mat-error> -->
+                </div>
+                <div class="form-container">
+                  <mat-form-field class="mat-form-field-date-picker" appearance="fill">
+                    <!-- <mat-label>Ngày - Tháng - Năm sinh</mat-label> -->
+                    <input matInput [matDatepicker]="picker" [ngModel]="employee.birth" name="birth">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="form-container">
+                  <p>Số điện thoại</p>
+                  <mat-form-field>
+                    <!-- <mat-label>Nhập số điện thoại theo mẫu</mat-label> -->
+                    <input matInput placeholder="" [ngModel]="employee.phone" name="phone">
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="cPhone(f.value.phone)===false">Nhập sai định dạng số điện thoại</mat-error> -->
+                </div>
 
-          <div class="form-container">
-            <p>Code</p>
-            <mat-form-field>
-              <input matInput placeholder="Input" [ngModel]="employee.code" name="code">
-            </mat-form-field>
-            <mat-error *ngIf="cCode(f.value.code)===false">Sai định dạng code hoặc chưa nhập code</mat-error>
-          </div>
+                <div class="form-container">
+                  <p>Code</p>
+                  <mat-form-field>
+                    <input matInput placeholder="" [ngModel]="employee.code" name="code">
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="cCode(f.value.code)===false">Sai định dạng code hoặc chưa nhập code</mat-error> -->
+                </div>
 
-          <div class="form-container">
-            <p>Liên kết đến ảnh chân dung</p>
-            <mat-form-field>
-              <input matInput placeholder="url" [ngModel]="employee.image" name="image">
-            </mat-form-field>
-            <mat-error *ngIf="cImageLink(f.value.image)===false" >Sai định dạng link ảnh hoặc chưa nhập</mat-error>
-          </div>
+                <div class="form-container">
+                  <p>Liên kết đến ảnh chân dung</p>
+                  <mat-form-field>
+                    <input matInput placeholder="" [ngModel]="employee.image" name="image">
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="cImageLink(f.value.image)===false" >Sai định dạng link ảnh hoặc chưa nhập</mat-error> -->
+                </div>
 
-          <div>
-            <button>Save</button>
+                <div>
+                  <button>Save</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>

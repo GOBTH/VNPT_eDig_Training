@@ -16,7 +16,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -28,11 +27,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule} from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatTableModule } from '@angular/material/table';
 import { EditingDialogComponent } from '../../pages/list/editing-dialog/editing-dialog.component';
 import { DeletingDialogComponent } from '../../pages/list/deleting-dialog/deleting-dialog.component';
 import { EditComponent } from '../../pages/list/edit/edit.component';
+import { AuthModule } from './auth/auth.module';
 
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EmployeesService } from '../../pages/list/list-services.service';
 
 @NgModule({
     imports: [
@@ -58,15 +60,31 @@ import { EditComponent } from '../../pages/list/edit/edit.component';
       MatSelectModule,
       MatButtonModule,
       MatInputModule,
-      MatSliderModule
+      MatSliderModule,
+      AuthModule
 
     ],
+    providers: [
+      {
+        provide: MatDialogRef,
+        useValue: {}
+      },
+      {
+        provide: MAT_DIALOG_DATA,
+        useValue: {}
+      }
+      ,
+      EmployeesService
+    ],
+    // exports: [
+    //   RouterModule
+    // ],
     declarations: [
       ListComponent,
-      EditingDialogComponent,
       DeletingDialogComponent,
-      EditComponent
-
+      EditComponent,
+      EditingDialogComponent
     ]
+
 })
 export class HaoLayoutModule {}

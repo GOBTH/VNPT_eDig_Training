@@ -1,5 +1,6 @@
 @include placeholder() {
   color: $dark-gray;
+  display: inline;
 };
 
 
@@ -12,8 +13,6 @@
     font-size: $font-size-base;
     @include transition-input-focus-color();
     @include box-shadow(none);
-
-
 
     &:focus{
         border: 1px solid $dark-gray;

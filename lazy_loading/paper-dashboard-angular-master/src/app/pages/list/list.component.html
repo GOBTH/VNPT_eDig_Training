@@ -67,12 +67,17 @@
               <th mat-header-cell *matHeaderCellDef>EDIT</th>
               <td mat-cell
                 *matCellDef="let element">
-                  <a [routerLink] = "['employee/edit', element.id]">
-                    <button style="color: black;"
+                  <a
+                  [routerLink]="['employee/edit', element.id]"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}">
+                    <button
+                      style="color: black;"
                       mat-raised-button
                       (click)="openDialogEditting(element.id)">
                         Edit
                     </button>
+                    <!-- <router-outlet></router-outlet> -->
                   </a>
               </td>
             </ng-container>
