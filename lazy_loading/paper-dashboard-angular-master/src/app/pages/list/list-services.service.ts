@@ -9,29 +9,29 @@ export class EmployeesService {
   lstEmployees: Employee[] = [
     {
       id : 'ABC_1',
-      name : 'Nguyễn Vĩnh Phong',
-      email : 'vinhphong@gmail.com',
+      name : 'Nguyễn Thụy Vĩnh Phong',
+      email : 'thuyvinhphong@gmail.com',
       phone : '0372532090',
       birth : new Date('1996-01-31'),
-      code: '02gp2lt512nvp',
+      code: '02gp2lt512ntvp',
       image: 'https://d25tv1xepz39hi.cloudfront.net/2017-09-04/files/portrait-photography_1661.jpg'
     },
     {
       id : 'BAC_2',
-      name : 'Trần Bình Dương',
-      email : 'binhduong@gmail.com',
+      name : 'Trần Bình Minh',
+      email : 'binhminh@gmail.com',
       phone : '+84989878988',
       birth : new Date('1999-02-02'),
-      code: '02gp2fd347tbd',
+      code: '02gp2fd347tbm',
       image: 'https://studios.vn/wp-content/uploads/2017/05/bi-quyet-chup-anh-chan-dung-ngoai-troi-cho-nhiep-anh-gia-7.jpg'
     },
     {
       id: 'FGH_3',
-      name: 'Lê Trung Nghĩa',
-      email: 'trungnghia@gmail.com',
+      name: 'Lê Phương Nghĩa',
+      email: 'phuongnghia@gmail.com',
       phone: '0909000232',
       birth : new Date('1998-06-25'),
-      code: '02gp2fd960ltn',
+      code: '02gp2fd960lpn',
       image: 'https://media.cungcau.vn/files/kieunguyen/2019/11/16/1-2-0725.jpg'
     }
 
@@ -49,9 +49,10 @@ export class EmployeesService {
 
   }
 
-  onAdd(newEmployee: Employee){
+  onAdd(newEmployee: Employee) {
 
     this.lstEmployees.push(newEmployee);
+    console.log(newEmployee);
     ELEMENT_DATA = this.lstEmployees;
 
   }
@@ -65,7 +66,7 @@ export class EmployeesService {
 
   }
 
-  onRemoveDataSource(id: string): Observable<EmployeeElement[]> {
+  onRefresh(): Observable<EmployeeElement[]> {
     //this.onRemove(id);
     let lst = this.onGet();
     return of(lst);

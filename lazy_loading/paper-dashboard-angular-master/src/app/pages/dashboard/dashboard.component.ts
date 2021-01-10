@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit{
               barPercentage: 1.6,
               gridLines: {
                 drawBorder: false,
-                color: 'rgba(255,255,255,0.1)',
+                color: 'rgba(255,255,255,0.05)',
                 zeroLineColor: "transparent",
                 display: false,
               },

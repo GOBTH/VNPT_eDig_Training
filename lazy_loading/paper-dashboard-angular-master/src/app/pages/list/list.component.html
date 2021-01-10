@@ -4,21 +4,27 @@
       <div class="card-header">
         <h4 class="card-title" style="text-align: center;">List of employees</h4>
       </div>
-      <button
-        type="submit"
-        style="background-color: lightgray; color:black; width:300px;"
-        class="btn btn-primary btn-round">
-        Add an employee
-      </button>
+      <a
+        routerLink="employee/add/0"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <button
+          type="submit"
+          style="background-color: lightgray; color:black; width:300px;"
+          class="btn btn-primary btn-round" (click)="openDialogEditting('0')">
+          Add an employee
+        </button>
+      </a>
       <div class="card-body">
         <div class ="table-responsive">
-          <table  mat-table [dataSource]="dataSource" class="table">
+          <table class="table-responsive"
+            mat-table [dataSource]="dataSource"
+            class="table">
             <!-- Position Column -->
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> ID </th>
               <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
-
             <!-- Name Column -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Name </th>

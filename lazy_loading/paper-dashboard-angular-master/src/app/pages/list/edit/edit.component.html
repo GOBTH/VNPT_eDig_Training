@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
   <div class="main-panel" style="height:1200px;">
     <div class="content" >
       <div class="row">
@@ -12,22 +12,22 @@
                 <div class="form-group">
                   <p>Họ và tên</p>
                   <input matInput placeholder="" [ngModel]="employee.name" name="name" required>
-                  <!-- <mat-form-field>
+                  <mat-form-field>
                     <mat-label>Nhập họ và tên</mat-label>
-                  </mat-form-field> -->
-                  <!-- <mat-error *ngIf="cName(f.value.name)===false">Sai định dạng Họ và tên hoặc chưa nhập họ tên</mat-error> -->
+                  </mat-form-field>
+                  <mat-error *ngIf="cName(f.value.name)===false">Sai định dạng Họ và tên hoặc chưa nhập họ tên</mat-error>
                 </div>
                 <div class="form-container">
                   <p>Email</p>
                   <input matInput placeholder="" [ngModel]="employee.email" name="email">
-                  <!-- <mat-form-field> -->
-                    <!-- <mat-label>Nhập địa chỉ email</mat-label> -->
-                  <!-- </mat-form-field> -->
-                  <!-- <mat-error *ngIf="cEmail(f.value.email)===false">Sai định dạng email hoặc chưa nhập email</mat-error> -->
+                  <mat-form-field>
+                    <mat-label>Nhập địa chỉ email</mat-label>
+                  </mat-form-field>
+                  <mat-error *ngIf="cEmail(f.value.email)===false">Sai định dạng email hoặc chưa nhập email</mat-error>
                 </div>
                 <div class="form-container">
                   <mat-form-field class="mat-form-field-date-picker" appearance="fill">
-                    <!-- <mat-label>Ngày - Tháng - Năm sinh</mat-label> -->
+                    <mat-label>Ngày - Tháng - Năm sinh</mat-label>
                     <input matInput [matDatepicker]="picker" [ngModel]="employee.birth" name="birth">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -36,10 +36,10 @@
                 <div class="form-container">
                   <p>Số điện thoại</p>
                   <mat-form-field>
-                    <!-- <mat-label>Nhập số điện thoại theo mẫu</mat-label> -->
+                    <mat-label>Nhập số điện thoại theo mẫu</mat-label>
                     <input matInput placeholder="" [ngModel]="employee.phone" name="phone">
                   </mat-form-field>
-                  <!-- <mat-error *ngIf="cPhone(f.value.phone)===false">Nhập sai định dạng số điện thoại</mat-error> -->
+                  <mat-error *ngIf="cPhone(f.value.phone)===false">Nhập sai định dạng số điện thoại</mat-error>
                 </div>
 
                 <div class="form-container">
@@ -47,7 +47,7 @@
                   <mat-form-field>
                     <input matInput placeholder="" [ngModel]="employee.code" name="code">
                   </mat-form-field>
-                  <!-- <mat-error *ngIf="cCode(f.value.code)===false">Sai định dạng code hoặc chưa nhập code</mat-error> -->
+                  <mat-error *ngIf="cCode(f.value.code)===false">Sai định dạng code hoặc chưa nhập code</mat-error>
                 </div>
 
                 <div class="form-container">
@@ -55,11 +55,163 @@
                   <mat-form-field>
                     <input matInput placeholder="" [ngModel]="employee.image" name="image">
                   </mat-form-field>
-                  <!-- <mat-error *ngIf="cImageLink(f.value.image)===false" >Sai định dạng link ảnh hoặc chưa nhập</mat-error> -->
+                  <mat-error *ngIf="cImageLink(f.value.image)===false" >Sai định dạng link ảnh hoặc chưa nhập</mat-error>
                 </div>
 
                 <div>
                   <button>Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="wrapper">
+  <div class="main-panel">
+    <div class="content" >
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card card-user">
+            <div class="image">
+              <img src="{{employee.image}}" alt="...">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card card-user">
+            <div class="card-header">
+              <h5 class="card-title">Edit</h5>
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="row">
+                  <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Company (disabled)</label>
+                      <input type="text" class="form-control" disabled="" value="VNBT Company">
+                    </div>
+                  </div>
+                  <div class="col-md-3 px-1">
+                    <div class="form-group">
+                      <label>Họ và tên</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Họ và tên"
+                        value="{{employee.name}}"
+                        [ngModel]="employee.name"
+                        name="name">
+
+                    </div>
+                    <p
+                      style="color:red; font: 8px;"
+                      *ngIf="cName(f.value.name)===false && f.value.name !== ''"
+                    > Nhập sai, tên người không có ký tự đặc biệt
+                      </p>
+                  </div>
+                  <div class="col-md-4 pl-1">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Email"
+                        value="{{employee.email}}"
+                        [ngModel]="employee.email"
+                        name="email">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Ngày sinh</label>
+                      <div class="input-group">
+                        <input
+                          type = "text"
+                          id = "{{employee.birth}}"
+                          ngbDatepicker
+                          #dp="ngbDatepicker"
+                          [ngModel]="employee.birth"
+                          name="birth"
+                          value="{{employee.birth}}">
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-outline-secondary calendar"
+                            (click)="dp.toggle()"
+                            type="button"
+                          >Chọn
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 pr-1">
+                    <div class="form-group">
+                      <label>Code</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Nhập số và chữ"
+                        value="{{employee.code}}"
+                        [ngModel]="employee.code"
+                        name="code">
+                    </div>
+                  </div>
+                  <div class="col-md-4 px-1">
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="0123456789"
+                        value="{{employee.phone}}"
+                        [ngModel]="employee.phone"
+                        name="phone">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Link of Portrait</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="http://a.png"
+                        value="{{employee.image}}"
+                        [ngModel]="employee.image"
+                        name="image">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="update ml-auto mr-auto">
+                    <p
+                    style="color:red; font: 8px;" *ngIf="!onCheck(f)"
+                    >*Phải nhập đầy đủ thông tin và đúng thì mới thể  lưu được!
+                    </p>
+                    <p
+                    style="color:green; font: 8px;" *ngIf="onCheck(f)"
+                    >*Tất cả thông tin đều đúng
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="update ml-auto mr-auto">
+                    <button
+                      mat-button
+                      type="submit"
+                      class="btn btn-primary btn-round"
+                      mat-dialog-close mat-dialog-close="true"
+
+                    >Update Profile</button>
+                  </div>
                 </div>
               </form>
             </div>

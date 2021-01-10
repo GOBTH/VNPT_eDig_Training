@@ -48,10 +48,11 @@ export class ListComponent implements OnInit  {
     this.dataSource.paginator = this.paginator;
   }
 
-  getDateToString (date: Date) {
-    const dd = String (date.getDate ()).padStart (2, '0');
-    const mm = String (date.getMonth () + 1).padStart (2, '0');
-    const yyyy = String (date.getFullYear ()).padStart (4, '0');
+  getDateToString (date: any) {
+
+    const dd   = String(date.getDate()).padStart (2, '0');
+    const mm   = String(date.getMonth() + 1).padStart (2, '0');
+    const yyyy = String(date.getFullYear()).padStart (4, '0');
     return dd + '/' + mm + '/' + yyyy;
   }
 
@@ -67,7 +68,7 @@ export class ListComponent implements OnInit  {
     dialogRef.afterClosed ().subscribe (result =>  {
       if (`${result}` === 'true') {
         this.eServices.onRemove (id);
-        this.refresh (id);
+        this.refresh();
         // console.log (this.dataSource.data);
       }
     });
@@ -76,13 +77,14 @@ export class ListComponent implements OnInit  {
     const dialogRef = this.dialog.open (EditComponent,  {data:  {id: ID}});
     dialogRef.afterClosed ().subscribe (result =>  {
       if  (`${result}` === 'true')  {
-        this.router.navigateByUrl ('list');
+        this.router.navigateByUrl('list');
+        this.refresh();
       }
     });
   }
 
-  refresh (id: string)  {
-    this.eServices.onRemoveDataSource (id).subscribe ( (data: EmployeeElement[]) =>  {
+  refresh ()  {
+    this.eServices.onRefresh().subscribe ( (data: EmployeeElement[]) =>  {
       this.dataSource.data = data;
     });
   }

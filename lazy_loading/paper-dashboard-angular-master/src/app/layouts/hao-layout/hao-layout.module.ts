@@ -7,7 +7,7 @@ import { HaoLayoutRoutes } from './hao-layout.routing';
 
 import { ListComponent } from '../../pages/list/list.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
@@ -61,7 +61,8 @@ import { EmployeesService } from '../../pages/list/list-services.service';
       MatButtonModule,
       MatInputModule,
       MatSliderModule,
-      AuthModule
+      AuthModule,
+      NgbModule,
 
     ],
     providers: [
@@ -76,15 +77,11 @@ import { EmployeesService } from '../../pages/list/list-services.service';
       ,
       EmployeesService
     ],
-    // exports: [
-    //   RouterModule
-    // ],
     declarations: [
       ListComponent,
       DeletingDialogComponent,
       EditComponent,
       EditingDialogComponent
     ]
-
 })
 export class HaoLayoutModule {}

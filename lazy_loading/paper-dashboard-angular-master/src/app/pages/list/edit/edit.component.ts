@@ -29,9 +29,9 @@ export class EditComponent implements OnInit  {
     image  : ''
   } as Employee;
   flag = false;
-  editOrAdd = true;
+  isEdit = true;
   constructor (
-    // private router: Router,
+    private router: Router,
     // private route: ActivatedRoute,
     private employeeServices: EmployeesService,
     public dialogRef: MatDialogRef<EditComponent>,
@@ -42,21 +42,17 @@ export class EditComponent implements OnInit  {
     // this.id = this.route.snapshot.paramMap.get ('id') as string;
     this.id = this.data.id;
     // console.log (this.id);
-    this.editOrAdd =  (String (this.id) !== '0');
-    if  (this.editOrAdd)  {
-      this.employee = this.employeeServices.onGetId (this.id) as Employee;
+    this.isEdit =  (this.id !== '0');
+    if  (this.isEdit)  {
+      this.employee = this.employeeServices.onGetId(this.id) as Employee;
     }
     // console.log (this.employee);
   }
 
   onSubmit (form: NgForm) {
     // console.log (form.value);
-    this.flag = this.cEmail (form.value.email)
-    && this.cName (form.value.name)
-    && this.cPhone (form.value.phone)
-    && this.cImageLink (form.value.image)
-    && this.cCode (form.value.code);
-    // console.log (this.cImageLink (form.value.image));
+    this.flag = this.onCheck(form);
+    // console.log (this.flag);
     if  (this.flag === true || this.id === '0')  {
       const e: Employee =  {
         id: this.id,
@@ -67,35 +63,55 @@ export class EditComponent implements OnInit  {
         code: form.value.code,
         image: form.value.image
       };
-      if  (this.id === '0' && this.onCheck (form))  {
-        e.id = this.randomId ();
-        this.employeeServices.onAdd (e);
+      if  (this.id === '0' && this.onCheck(form))  {
+        e.id = this.randomId();
+        this.employeeServices.onAdd(e);
         // console.log (this.employeeServices.lstEmployees.length);
       } else  {
-        this.employeeServices.onUpdate (e);
+        this.employeeServices.onUpdate(e);
         console.log ('update');
-        console.log (this.employeeServices.lstEmployees[0]);
+        // console.log (this.employeeServices.lstEmployees[0]);
       }
-
     }
+
   }
 
+  onBack(){
+    this.router.navigateByUrl('list');
+  }
+
+  onEmptyInfo() {
+    return  this.employee.name  === '' &&
+            this.employee.email === '' &&
+            this.employee.code  === '' &&
+            this.employee.phone === '' &&
+            this.employee.image === '';
+  }
   onCheck (form: NgForm) {
-    return this.flag = this.cEmail (form.value.email)
+    // console.log();
+    let flag = this.cEmail (form.value.email)
     && this.cName (form.value.name)
     && this.cPhone (form.value.phone)
     && this.cImageLink (form.value.image)
     && this.cCode (form.value.code);
+    // console.log(this.cEmail (form.value.email));
+    // console.log(this.cName (form.value.name));
+    // console.log(this.cPhone (form.value.phone));
+    // console.log(this.cImageLink (form.value.image));
+    // console.log(this.cCode (form.value.code));
+    return flag;
   }
 
   cName (name: string | undefined) {
+    // console.log('name: ' + name);
     if  (!name || name === '' || name === ' ') {
       return false;
     }
-    const s = '0123456789!#$%^&* ()-_+ {}[];:\'\"?/>.<,';
+    const s = '0123456789!#$%^&*()-_+{}[];:\'\"?/>.<,';
     for (let i = 0 ; i < s.length ; i++) {
       for  (let j = 0 ; j < name.length ; j++) {
         if  (s[i] === name[j])  {
+          console.log(s[i].charCodeAt(0));
           return false;
         }
       }
@@ -104,28 +120,32 @@ export class EditComponent implements OnInit  {
   }
 
   cEmail (email: string) {
-    // console.log (email);
-    const re = /^ ( ([^<> ()[\]\\.,;:\s@"]+ (\.[^<> ()[\]\\.,;:\s@"]+)*)| (".+"))@ ( (\[[0-9] {1,3}\.[0-9] {1,3}\.[0-9] {1,3}\.[0-9] {1,3}\])| ( ([a-zA-Z\-0-9]+\.)+[a-zA-Z] {2,}))$/;
-    return re.test (String (email).toLowerCase ());
+    // console.log('email: ' + email);
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9] {1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test (String (email).toLowerCase());
   }
 
   cPhone (phone: string) {
-    const re = new RegExp ('^ ( (\\+84-?)|0)?[0-9] {10}$');
-    return re.test (String (phone));
+    // console.log('phone: ' + phone);
+    const re = new RegExp ('^((\\+84-?)|0)?[0-9]{9}$');
+    return re.test(phone);
   }
 
   cImageLink (url: string)  {
-    const re1 = new RegExp ('\. (jpeg|jpg|gif|png)$');
-    let s = ' (https?:\/\/ (?:www\.| (?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s] {2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s] {2,}|https?:\/\/ (?:www\.| (?!www))[a-zA-Z0-9]+\.[^\s] {2,}|www\.[a-zA-Z0-9]+\.[^\s] {2,})';
-    const re2 = new RegExp (s);
-    return re1.test (url) && re2.test (url);
+    // console.log('url ' + url);
+    const re1 = new RegExp ('\.(jpeg|jpg|gif|png)$');
+    return re1.test(url);
+    // let s = '(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s] {2,})';
+    // const re2 = new RegExp (s);
+    // return re1.test (url) && re2.test (url);
   }
 
   cCode (code: string | undefined)  {
+    // console.log('code ' + code);
     if  (!code || code === '' || code === ' ') {
       return false;
     }
-    const s = '!#$%^&* ()-_+ {}[];:\'\"?/>.<,';
+    const s = '!#$%^&*()-_+{}[];:\'\"?/>.<,';
     for (let i = 0 ; i < s.length ; i++)  {
       for  (let j = 0 ; j < code.length ; j++) {
         if  (s[i] === code[j])  {
