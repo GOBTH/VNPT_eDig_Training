@@ -61,6 +61,7 @@ export class EditComponent implements OnInit  {
     // console.log (form.value);
     this.flag = this.onCheck(form);
     // console.log (this.flag);
+
     if  (this.flag === true || this.id === '0')  {
       let e: Employee =  {
         id: this.id,
