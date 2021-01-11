@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from '../models/employee.model';
 import { EmployeeElement, ELEMENT_DATA, EmployeesService } from '../list-services.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStructAdapter } from '@ng-bootstrap/ng-bootstrap/datepicker/adapters/ngb-date-adapter';
 
 
 export interface DialogData {
@@ -18,6 +20,7 @@ export interface DialogData {
 })
 export class EditComponent implements OnInit  {
   id: string | any;
+  selectedDate: NgbDate = undefined;
   dataSource = new MatTableDataSource<EmployeeElement> (ELEMENT_DATA);
   employee =  {
     id     : '',
@@ -45,6 +48,11 @@ export class EditComponent implements OnInit  {
     this.isEdit =  (this.id !== '0');
     if  (this.isEdit)  {
       this.employee = this.employeeServices.onGetId(this.id) as Employee;
+      this.selectedDate = {
+        day: this.employee.birth.getDate(),
+        month: this.employee.birth.getMonth() + 1,
+        year: this.employee.birth.getFullYear()
+      } as NgbDate;
     }
     // console.log (this.employee);
   }
@@ -54,22 +62,32 @@ export class EditComponent implements OnInit  {
     this.flag = this.onCheck(form);
     // console.log (this.flag);
     if  (this.flag === true || this.id === '0')  {
-      const e: Employee =  {
+      let e: Employee =  {
         id: this.id,
         name: form.value.name,
         email: form.value.email,
         phone: form.value.phone,
-        birth: form.value.birth,
+        //birth: this.formatDate(form.value.birth),
         code: form.value.code,
         image: form.value.image
-      };
+      } as Employee;
+      try{
+        e.birth=this.formatDate(form.value.birth);
+        // console.log('try .... formatDate'+form.value.birth);
+        this.selectedDate=form.value.birth;
+      }
+      catch{
+        e.birth=form.value.birth;
+
+      }
+      // console.log(form.value);
       if  (this.id === '0' && this.onCheck(form))  {
         e.id = this.randomId();
         this.employeeServices.onAdd(e);
         // console.log (this.employeeServices.lstEmployees.length);
       } else  {
         this.employeeServices.onUpdate(e);
-        console.log ('update');
+        // console.log ('update');
         // console.log (this.employeeServices.lstEmployees[0]);
       }
     }
@@ -170,4 +188,21 @@ export class EditComponent implements OnInit  {
     }
     return res;
   }
+
+  formatDate(object: any){
+    return new Date(object.year + '-' + object.month + '-' + object.day);
+  }
+  convertDateToObject(date: any){
+    console.log(date);
+    // const dd   = String(date.getDate()).padStart (2, '0');
+    // const mm   = String(date.getMonth() + 1).padStart (2, '0');
+    // const yyyy = String(date.getFullYear()).padStart (4, '0');
+    // return yyyy + '-' + mm + '-' + dd;
+    //return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+    // console.log(date);
+    //return {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()} as NgbDate;
+  }
+
+
+
 }

@@ -131,13 +131,13 @@
                       <label>Ngày sinh</label>
                       <div class="input-group">
                         <input
-                          type = "text"
+                          type = "object"
                           id = "{{employee.birth}}"
                           ngbDatepicker
                           #dp="ngbDatepicker"
-                          [ngModel]="employee.birth"
+                          [ngModel]="selectedDate"
                           name="birth"
-                          value="{{employee.birth}}">
+                          value="{{selectedDate}}">
                         <div class="input-group-append">
                           <button
                             class="btn btn-outline-secondary calendar"

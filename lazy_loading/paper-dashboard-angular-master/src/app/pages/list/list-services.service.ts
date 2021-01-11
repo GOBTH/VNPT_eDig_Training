@@ -76,7 +76,7 @@ export class EmployeesService {
     let index = this.lstEmployees.findIndex(element => element.id === employee.id);
     this.lstEmployees[index] = employee;
     ELEMENT_DATA[index] = employee;
-    console.log(ELEMENT_DATA);
+    // console.log(ELEMENT_DATA);
   }
 
   onFindId(id: string){
