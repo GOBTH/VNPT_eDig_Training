@@ -163,7 +163,7 @@ export class EditComponent implements OnInit  {
     if  (!code || code === '' || code === ' ') {
       return false;
     }
-    const s = '!#$%^&*()-_+{}[];:\'\"?/>.<,';
+    const s = '!@#$%^&*()-_+{}[];:\'\"?/>.<,';
     for (let i = 0 ; i < s.length ; i++)  {
       for  (let j = 0 ; j < code.length ; j++) {
         if  (s[i] === code[j])  {
@@ -192,15 +192,12 @@ export class EditComponent implements OnInit  {
   formatDate(object: any){
     return new Date(object.year + '-' + object.month + '-' + object.day);
   }
-  convertDateToObject(date: any){
-    console.log(date);
-    // const dd   = String(date.getDate()).padStart (2, '0');
-    // const mm   = String(date.getMonth() + 1).padStart (2, '0');
-    // const yyyy = String(date.getFullYear()).padStart (4, '0');
-    // return yyyy + '-' + mm + '-' + dd;
-    //return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
-    // console.log(date);
-    //return {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()} as NgbDate;
+
+  outCautions(form: NgForm){
+    let s : String[] = [];
+    if (this.cName(form.value.name)==false){
+      s.push('Nhập sai định dạng tên, hãy nhập lại. \n');
+    }
   }
 
 

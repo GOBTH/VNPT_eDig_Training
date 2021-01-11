@@ -20,7 +20,8 @@ export const HaoLayoutRoutes: Routes = [
               {
                 path: ':id',
                 canActivateChild: [AuthGuard],
-                component: EditComponent
+                component: EditComponent,
+                //outlet: 'edit-cpm'
               }
             ]
           }
@@ -30,7 +31,8 @@ export const HaoLayoutRoutes: Routes = [
             children: [
               {
                 path: ':id',
-                component: EditComponent
+                component: EditComponent,
+                //outlet: 'edit-cpm'
               }
             ]
           }

@@ -71,19 +71,25 @@
 </div> -->
 <div class="wrapper">
   <div class="main-panel">
+    <button
+      mat-dialog-close mat-dialog-close="false"
+      (click)="onBack()"
+      class = "close-btn topright button-color button-size"
+      >X
+    </button>
     <div class="content" >
       <div class="row">
         <div class="col-md-4">
           <div class="card card-user">
             <div class="image">
-              <img src="{{employee.image}}" alt="...">
+              <img src="{{isEdit==true?employee.image:'assets/img/default.png'}}" alt="..." onerror="this.src='assets/img/default.png'">
             </div>
           </div>
         </div>
         <div class="col-md-8">
           <div class="card card-user">
             <div class="card-header">
-              <h5 class="card-title">Edit</h5>
+              <h5 class="card-title">{{isEdit==true?'Edit':'Add'}}</h5>
             </div>
             <div class="card-body">
               <form (ngSubmit)="onSubmit(f)" #f="ngForm">
@@ -100,29 +106,33 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Họ và tên"
+                        placeholder="Ví dụ: Nguyễn Văn A"
                         value="{{employee.name}}"
                         [ngModel]="employee.name"
                         name="name">
-
                     </div>
                     <p
                       style="color:red; font: 8px;"
                       *ngIf="cName(f.value.name)===false && f.value.name !== ''"
-                    > Nhập sai, tên người không có ký tự đặc biệt
-                      </p>
+                      >Nhập sai, tên người không có ký tự đặc biệt và ký số.
+                    </p>
                   </div>
                   <div class="col-md-4 pl-1">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Email</label>
+                      <label>Email</label>
                       <input
                         type="email"
                         class="form-control"
-                        placeholder="Email"
+                        placeholder="Ví dụ: vana123@.gmail.com"
                         value="{{employee.email}}"
                         [ngModel]="employee.email"
                         name="email">
                     </div>
+                    <p
+                      style="color:red; font: 8px;"
+                      *ngIf="cEmail(f.value.email)===false && f.value.email !== ''"
+                      > Nhập sai định dạng của email.
+                    </p>
                   </div>
                 </div>
                 <div class="row">
@@ -157,11 +167,16 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập số và chữ"
+                        placeholder="Ví dụ: 02gp2tf123nva"
                         value="{{employee.code}}"
                         [ngModel]="employee.code"
                         name="code">
                     </div>
+                    <p
+                      style="color:red; font: 8px;"
+                      *ngIf="cCode(f.value.code)===false && f.value.code !== ''"
+                      > Nhập sai, mã code không có ký tự đặc biệt, chỉ gồm chữ và số.
+                    </p>
                   </div>
                   <div class="col-md-4 px-1">
                     <div class="form-group">
@@ -169,11 +184,16 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="0123456789"
+                        placeholder="Ví dụ: 0123456789"
                         value="{{employee.phone}}"
                         [ngModel]="employee.phone"
                         name="phone">
                     </div>
+                    <p
+                      style="color:red; font: 8px;"
+                      *ngIf="cPhone(f.value.phone)===false && f.value.phone !== ''"
+                      > Nhập sai, nhập đúng định dạng số điện thoại.
+                    </p>
                   </div>
                 </div>
                 <div class="row">
@@ -183,11 +203,16 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="http://a.png"
+                        placeholder="Ví dụ: http://a.png"
                         value="{{employee.image}}"
                         [ngModel]="employee.image"
                         name="image">
                     </div>
+                    <p
+                      style="color:red; font: 8px;"
+                      *ngIf="cImageLink(f.value.image) === false && f.value.image !== ''"
+                      >Nhập sai, đây không phải là một link ảnh.
+                    </p>
                   </div>
                 </div>
                 <div class="row">
@@ -209,7 +234,7 @@
                       type="submit"
                       class="btn btn-primary btn-round"
                       mat-dialog-close mat-dialog-close="true"
-
+                      [disabled]="!onCheck(f)"
                     >Update Profile</button>
                   </div>
                 </div>
